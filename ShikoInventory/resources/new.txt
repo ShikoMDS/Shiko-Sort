@@ -1,0 +1,27 @@
+NAME // TYPE // PRICE // QUANTITY
+Apple // Consumable // 0.99 // 5
+Banana // Consumable // 1.25 // 8
+Carrot // Consumable // 0.75 // 10
+Dagger // Weapon // 12.99 // 1
+Elixir // Consumable // 5.49 // 3
+Frost Armor // Armor // 29.99 // 1
+Greatsword // Weapon // 24.99 // 2
+Healing Potion // Consumable // 3.99 // 7
+Ice Staff // Weapon // 19.99 // 1
+Javelin // Weapon // 9.99 // 4
+Key // Utility // 2.50 // 2
+Leather Armor // Armor // 14.99 // 3
+Mace // Weapon // 14.99 // 2
+Notebook // Utility // 7.49 // 1
+Orb // Utility // 8.99 // 1
+Potion of Invisibility // Consumable // 7.99 // 2
+Quiver // Utility // 4.99 // 1
+Ruby Ring // Consumable // 15.99 // 1
+Sword // Weapon // 19.99 // 1
+Torch // Utility // 1.99 // 5
+Umbrella // Utility // 12.99 // 1
+Vest // Armor // 9.99 // 2
+Wand // Weapon // 8.49 // 3
+X-Ray Goggles // Utility // 29.99 // 1
+Yellow Gem // Consumable // 4.25 // 6
+Zephyr Wings // Utility // 25.99 // 1

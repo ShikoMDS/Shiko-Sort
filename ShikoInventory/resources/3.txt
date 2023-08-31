@@ -1,0 +1,5 @@
+NAME // TYPE // PRICE // QUANTITY
+1 // Consumable // -1 // 2
+0 // Consumable // 2 // 0
+6 // Consumable // 9.0 // -1
+2 // Weapon // 1.00 // 5

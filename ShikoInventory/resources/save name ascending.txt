@@ -1,0 +1,27 @@
+NAME // TYPE // PRICE // QUANTITY
+Antimagic Oil // Consumable // 1300.00 // 3
+Bag of Cats // Utility // 50.00 // 1
+Claw Blade // Weapon // 0.20 // 2
+Darkwood Shield // Armor // 44.00 // 1
+Eyes of the Eagle // Utility // 70.00 // 1
+Full Plate // Armor // 3.00 // 1
+Ghost Oil // Consumable // 1.80 // 5
+Hellknight Plate // Armor // 3.50 // 1
+Immovable Rod // Utility // 60.00 // 2
+Javelin // Weapon // 0.01 // 6
+Keen Rune // Utility // 300.00 // 2
+Leather Armor // Armor // 0.20 // 1
+Mask of Mercy // Utility // 10.00 // 1
+Noxious Jerkin // Armor // 280.00 // 1
+Owlbear Claw // Consumable // 0.30 // 3
+Pathfinder's Coin // Utility // 3.00 // 1
+Quill of Passage // Utility // 120.00 // 1
+Rapier // Weapon // 0.20 // 2
+Switchscythe // Weapon // 1.20 // 1
+Tower Shield // Armor // 1.00 // 1
+Unholy Water // Consumable // 0.30 // 8
+Victory Plate // Armor // 67.50 // 1
+Warhammer // Weapon // 0.01 // 1
+Xulgath Fang // Consumable // 25.00 // 4
+Yellow Musk Vial // Consumable // 0.70 // 2
+Zerk // Consumable // 2.00 // 1

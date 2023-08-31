@@ -1,0 +1,40 @@
+NAME // TYPE // PRICE // QUANTITY
+Owlbear Claw  // Weapon // 0.30 // 3
+Victory Plate  // Weapon // 67.50 // 1
+Javelin  // Weapon // 0.01 // 6
+Switchscythe  // Weapon // 1.20 // 1
+Antimagic Oil  // Weapon // 1300.00 // 3
+Ghost Oil  // Weapon // 1.80 // 5
+Bag of Cats  // Weapon // 50.00 // 1
+Pathfinder's Coin  // Weapon // 3.00 // 1
+Rapier  // Weapon // 0.20 // 2
+Xulgath Fang  // Weapon // 25.00 // 4
+Eyes of the Eagle  // Weapon // 70.00 // 1
+Yellow Musk Vial  // Weapon // 0.70 // 2
+Tower Shield  // Weapon // 1.00 // 1
+Zerk  // Weapon // 2.00 // 1
+Noxious Jerkin  // Weapon // 280.00 // 1
+Darkwood Shield  // Weapon // 44.00 // 1
+Mask of Mercy  // Weapon // 10.00 // 1
+Leather Armor  // Weapon // 0.20 // 1
+Hellknight Plate  // Weapon // 3.50 // 1
+Immovable Rod  // Weapon // 60.00 // 2
+Claw Blade  // Weapon // 0.20 // 2
+Warhammer  // Weapon // 0.01 // 1
+Unholy Water  // Weapon // 0.30 // 8
+Quill of Passage  // Weapon // 120.00 // 1
+Keen Rune  // Weapon // 300.00 // 2
+Full Plate  // Weapon // 3.00 // 1
+Owlbear Claw   // Weapon // 0.30 // 3
+Victory Plate   // Weapon // 67.50 // 1
+Javelin   // Weapon // 0.01 // 6
+Switchscythe   // Weapon // 1.20 // 1
+Antimagic Oil   // Weapon // 1300.00 // 3
+Ghost Oil   // Weapon // 1.80 // 5
+Bag of Cats   // Weapon // 50.00 // 1
+Pathfinder's Coin   // Weapon // 3.00 // 1
+Rapier   // Weapon // 0.20 // 2
+Xulgath Fang   // Weapon // 25.00 // 4
+Eyes of the Eagle   // Weapon // 70.00 // 1
+Yellow Musk Vial   // Weapon // 0.70 // 2
+Tower Shield   // Weapon // 1.00 // 1

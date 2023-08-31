@@ -1,0 +1,5 @@
+NAME // TYPE // PRICE // QUANTITY
+1 // Weapon // 1.00 // 1
+2 // Consumable // 2.00 // 2
+3 // Armor // 3.00 // 3
+4 // Utility // 4.00 // 4
