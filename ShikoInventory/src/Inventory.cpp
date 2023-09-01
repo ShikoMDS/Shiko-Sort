@@ -58,7 +58,7 @@ ItemType Inventory::stringToEnum(const wxString& TypeStr)
 	};
 
 void Inventory::loadFile(const wxString& Filename)
-{
+{	
 	if (!Filename.empty())
 	{
 		wxTextFile File;
@@ -355,25 +355,44 @@ void Inventory::clearInventory()
 	MSize = 0;
 }
 
-void Inventory::quickSortByName(const bool Ascending)
+
+/* Each of these functions sorts the inventory by a different attribute: Name, Type, Price, or Quantity.
+
+A lambda function is a small, anonymous function (function without a name) defined in the scope where it is used, often passed as an argument to other functions. In C++, lambda functions are a convenient way to define simple function objects.
+
+In this case, each quickSort... function calls the general quickSort function, passing a lambda function that compares two Items by the desired attribute. The quickSort function uses this lambda to compare Items while sorting.
+
+The syntax for a lambda function is: [captures](parameters) {body}. 
+Here, captures is a list of variables from the surrounding scope that the lambda needs to access. parameters is the list of parameters the lambda takes, and body is the code the lambda executes. */
+
+// Function to sort the inventory by name.
+void Inventory::quickSortByName(const bool isAscending)
 {
-	quickSortByNameRecursive(MHead, MTail, Ascending);
+	// Call the general quickSort function, passing a lambda function that compares the names of two items.
+	quickSort(MHead, MTail, isAscending, [](const Item& a, const Item& b) {return a.getName() < b.getName();});
 }
 
-void Inventory::quickSortByType(const bool Ascending)
+// Function to sort the inventory by type.
+void Inventory::quickSortByType(const bool isAscending)
 {
-	quickSortByTypeRecursive(MHead, MTail, Ascending);
+	// Call the general quickSort function, passing a lambda function that compares the types of two items.
+	quickSort(MHead, MTail, isAscending, [](const Item& a, const Item& b) {return a.getType() < b.getType();});
 }
 
-void Inventory::quickSortByPrice(const bool Ascending)
+// Function to sort the inventory by price.
+void Inventory::quickSortByPrice(const bool isAscending)
 {
-	quickSortByPriceRecursive(MHead, MTail, Ascending);
+	// Call the general quickSort function, passing a lambda function that compares the prices of two items.
+	quickSort(MHead, MTail, isAscending, [](const Item& a, const Item& b) {return a.getPrice() < b.getPrice();});
 }
 
-void Inventory::quickSortByQuantity(const bool Ascending)
+// Function to sort the inventory by quantity.
+void Inventory::quickSortByQuantity(const bool isAscending)
 {
-	quickSortByQuantityRecursive(MHead, MTail, Ascending);
+	// Call the general quickSort function, passing a lambda function that compares the quantities of two items.
+	quickSort(MHead, MTail, isAscending, [](const Item& a, const Item& b) {return a.getQuantity() < b.getQuantity();});
 }
+
 
 Inventory::Node* Inventory::getHead() const
 {
@@ -390,173 +409,63 @@ size_t Inventory::getSize() const
 	return MSize;
 }
 
-void Inventory::quickSortByNameRecursive(Node* Left, Node* Right, const bool Ascending)
+// Quick sort function for a doubly-linked list.
+template <typename Compare>
+void Inventory::quickSort(Node* Left, Node* Right, const bool isAscending, const Compare& compFunction)
 {
-	if (Left && Right && Left != Right && Left != Right->Next)
+	// Base condition: if either pointer is null, or if they point to the same node or adjacent nodes, return.
+	if (Right != nullptr && Left != Right && Left != Right->next)
 	{
-		if (const Node* Pivot = partitionByName(Left, Right, Ascending); Pivot != nullptr)
-		{
-			quickSortByNameRecursive(Left, Pivot->Previous, Ascending);
-			quickSortByNameRecursive(Pivot->Next, Right, Ascending);
-		}
+		// Partition the list and get the partition node.
+		const Node* partition = createPartition(Left, Right, isAscending, compFunction);
+		
+		// Sort the list to the left of the partition.
+		quickSort(Left, partition->Previous, isAscending, compFunction);
+		
+		// Sort the list to the right of the partition.
+		quickSort(partition->Next, Right, isAscending, compFunction);
 	}
 }
 
-
-void Inventory::quickSortByTypeRecursive(Node* Left, Node* Right, const bool Ascending)
+// Function to partition the doubly-linked list around a pivot element.
+template <typename Compare>
+Inventory::Node* Inventory::createPartition(Node* Left, Node* Right, const bool isAscending, const Compare& compFunction) const
 {
-	if (Left && Right && Left != Right && Left != Right->Next)
+	// Choose the data of the node pointed to by 'Right' as the pivot.
+	const Item& pivot = Right->Data;
+	
+	// Initialize pointers for the partition logic.
+	Node* leftIndex = Left->Previous;
+	Node* rightIndex = Left;
+
+	// Loop through each node and re-arrange the list so that all elements smaller
+	// than the pivot come before it and all elements greater come after it.
+	for (; rightIndex != Right; rightIndex = rightIndex->Next)
 	{
-		if (const Node* Pivot = partitionByType(Left, Right, Ascending); Pivot != nullptr)
+		// The condition for swapping depends on whether sorting is ascending or descending. Uses the Lambda comparison function we passed in.
+		if ((isAscending && compFunction(rightIndex->Data, pivot)) || (!isAscending && compFunction(pivot, rightIndex->Data)))
 		{
-			quickSortByTypeRecursive(Left, Pivot->Previous, Ascending);
-			quickSortByTypeRecursive(Pivot->Next, Right, Ascending);
+			// Move the left index one step, taking care of the edge case.
+			leftIndex = (leftIndex == nullptr) ? Left : leftIndex->Next;
+			
+			// Swap the current element with the left index.
+			SwapItems(leftIndex, rightIndex);
 		}
 	}
+
+	// Finally, swap the pivot with the left index so that the pivot is in its final sorted position.
+	leftIndex = (leftIndex == nullptr) ? Left : leftIndex->Next;
+	SwapItems(leftIndex, Right);
+
+	// Return the node that is now at the pivot position.
+	return leftIndex;
 }
 
-void Inventory::quickSortByPriceRecursive(Node* Left, Node* Right, const bool Ascending)
+// Function to swap the data between two nodes.
+void Inventory::swapNodes(Node* nodeA, Node* nodeB) const 
 {
-	if (Left && Right && Left != Right && Left != Right->Next)
-	{
-		if (const Node* Pivot = partitionByPrice(Left, Right, Ascending); Pivot != nullptr)
-		{
-			quickSortByPriceRecursive(Left, Pivot->Previous, Ascending);
-			quickSortByPriceRecursive(Pivot->Next, Right, Ascending);
-		}
-	}
-}
+	// std::swap is a C++ standard library function that swaps two elements.
+	std::swap(nodeA->Data, nodeB->Data); // Assuming that the 'Data' type supports swap, probably not, so have no fucking clue if this works but it is something, else create a temp item and swap data that way
 
-void Inventory::quickSortByQuantityRecursive(Node* Left, Node* Right, const bool Ascending)
-{
-	if (Left && Right && Left != Right && Left != Right->Next)
-	{
-		if (const Node* Pivot = partitionByQuantity(Left, Right, Ascending); Pivot != nullptr)
-		{
-			quickSortByQuantityRecursive(Left, Pivot->Previous, Ascending);
-			quickSortByQuantityRecursive(Pivot->Next, Right, Ascending);
-		}
-	}
-}
-
-Inventory::Node* Inventory::partitionByName(Node* Left, Node* Right, const bool Ascending) const
-{
-	const wxString& PivotName = Right->Data.getName();
-	Node* I = Left->Previous;
-
-	for (Node* J = Left; J != Right && J != nullptr; J = J->Next)
-	{
-		if ((Ascending && J->Data.getName() <= PivotName) || (!Ascending && J->Data.getName() >= PivotName))
-		{
-			I = (I == nullptr) ? Left : I->Next;
-			if (I != nullptr)
-			{
-				std::swap(I->Data, J->Data);
-			}
-		}
-	}
-
-	if (I != nullptr)
-	{
-		I = I->Next;
-		if (I != nullptr)
-		{
-			std::swap(I->Data, Right->Data);
-		}
-	}
-	return I;
-}
-
-static std::unordered_map<ItemType, std::string> ItemTypeToString =
-{
-	{ItemType::Weapon, "Weapon"},
-	{ItemType::Armor, "Armor"},
-	{ItemType::Consumable, "Consumable"},
-	{ItemType::Utility, "Utility"}
-};
-
-Inventory::Node* Inventory::partitionByType(Node* Left, Node* Right, const bool Ascending) const
-{
-	const std::string& PivotTypeStr = ItemTypeToString[Right->Data.getType()];
-	Node* I = Left->Previous;
-
-	for (Node* J = Left; J != Right && J != nullptr; J = J->Next)
-	{
-		if (const std::string& JTypeStr = ItemTypeToString[J->Data.getType()]; (Ascending && JTypeStr <= PivotTypeStr)
-			|| (!Ascending && JTypeStr >= PivotTypeStr))
-		{
-			I = (I == nullptr) ? Left : I->Next;
-			if (I != nullptr)
-			{
-				std::swap(I->Data, J->Data);
-			}
-		}
-	}
-
-	if (I != nullptr)
-	{
-		I = I->Next;
-		if (I != nullptr)
-		{
-			std::swap(I->Data, Right->Data);
-		}
-	}
-	return I;
-}
-
-Inventory::Node* Inventory::partitionByPrice(Node* Left, Node* Right, const bool Ascending) const
-{
-	const double PivotPrice = Right->Data.getPrice();
-	Node* I = Left->Previous;
-
-	for (Node* J = Left; J != Right && J != nullptr; J = J->Next)
-	{
-		if ((Ascending && J->Data.getPrice() <= PivotPrice) || (!Ascending && J->Data.getPrice() >= PivotPrice))
-		{
-			I = (I == nullptr) ? Left : I->Next;
-			if (I != nullptr)
-			{
-				std::swap(I->Data, J->Data);
-			}
-		}
-	}
-
-	if (I != nullptr)
-	{
-		I = I->Next;
-		if (I != nullptr)
-		{
-			std::swap(I->Data, Right->Data);
-		}
-	}
-	return I;
-}
-
-Inventory::Node* Inventory::partitionByQuantity(Node* Left, Node* Right, const bool Ascending) const
-{
-	const int PivotQuantity = Right->Data.getQuantity();
-	Node* I = Left->Previous;
-
-	for (Node* J = Left; J != Right && J != nullptr; J = J->Next)
-	{
-		if ((Ascending && J->Data.getQuantity() <= PivotQuantity) || (!Ascending && J->Data.getQuantity() >=
-			PivotQuantity))
-		{
-			I = (I == nullptr) ? Left : I->Next;
-			if (I != nullptr)
-			{
-				std::swap(I->Data, J->Data);
-			}
-		}
-	}
-
-	if (I != nullptr)
-	{
-		I = I->Next;
-		if (I != nullptr)
-		{
-			std::swap(I->Data, Right->Data);
-		}
-	}
-	return I;
+	// You should preferably attempt to swap the nodes themself rather then the item data. This would then require you to fix the pointers of the nodes both left and right of the swapped nodes
 }
