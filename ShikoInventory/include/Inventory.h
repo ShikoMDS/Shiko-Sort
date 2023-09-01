@@ -37,10 +37,10 @@ public:
 	void accessItem(const wxString& Name, Item& NewItem) const; // Access and edit a selected item from index
 	void clearInventory(); // Deletes all items from current inventory
 	
-	void quickSortByName(bool Ascending);
-	void quickSortByType(bool Ascending);
-	void quickSortByPrice(bool Ascending);
-	void quickSortByQuantity(bool Ascending);
+	void quickSortByName(bool isAscending);
+	void quickSortByType(bool isAscending);
+	void quickSortByPrice(bool isAscending);
+	void quickSortByQuantity(bool isAscending);
 
 	[[nodiscard]] Node* getHead() const;
 	[[nodiscard]] Node* getTail() const;
@@ -53,14 +53,8 @@ private:
 	// Index size 
 	size_t MSize; // size_t array indexing/loop counting https://en.cppreference.com/w/c/types/size_t
 
-	void quickSortByNameRecursive(Node* Left, Node* Right, bool Ascending);
-	void quickSortByTypeRecursive(Node* Left, Node* Right, bool Ascending);
-	void quickSortByPriceRecursive(Node* Left, Node* Right, bool Ascending);
-	void quickSortByQuantityRecursive(Node* Left, Node* Right, bool Ascending);
-
-	Node* partitionByName(Node* Left, Node* Right, bool Ascending) const;
-	Node* partitionByType(Node* Left, Node* Right, bool Ascending) const;
-	Node* partitionByPrice(Node* Left, Node* Right, bool Ascending) const;
-	Node* partitionByQuantity(Node* Left, Node* Right, bool Ascending) const;
+	void quickSort(Node* Left, Node* Right, const bool isAscending, const auto& compFunction);
+	Node* createPartition(Node* Left, Node* Right, bool Ascending, const auto& *compFunc) const;
+	void swapNodes(Node* nodeA, Node* nodeB) const;
 };
 

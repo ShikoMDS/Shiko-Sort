@@ -18,10 +18,10 @@ Mail : ayoub.ahmad@mds.ac.nz
 
 enum class ItemType
 {
-	Weapon,
-	Armor,
-	Consumable,
-	Utility
+	Weapon = 3,
+	Armor = 0,
+	Consumable = 1,
+	Utility = 2,
 };
 
 class Item
